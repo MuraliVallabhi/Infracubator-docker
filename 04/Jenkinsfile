@@ -1,0 +1,19 @@
+pipeline {
+    agent any 
+
+    parameters {
+        string(name: 'VER', defaultValue: '', description: 'Version')
+    }
+
+    stages {
+
+        stage('Docker Build') {
+            steps {
+                docker build -t docker.io/cicdimage:${VER} . 
+                docker push docker.io/cicdimage:${VER}
+            }
+        }
+
+    }
+}
+
